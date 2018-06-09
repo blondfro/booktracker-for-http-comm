@@ -20,13 +20,13 @@ import { CoreModule } from './core/core.module';
     EditReaderComponent,
     EditBookComponent,
     AddReaderComponent,
-    HttpClientModule
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    CoreModule
+    CoreModule,
+    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })
