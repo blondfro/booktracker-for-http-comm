@@ -22,12 +22,36 @@ export class DataService {
     this.mostPopularBook = popularBook;
   }
 
-  getAllReaders(): Reader[] {
-    return allReaders;
+  getAllReaders(): Observable<Reader[]> {
+    return this.http.get<Reader[]>('/api/readers');
   }
 
-  getReaderById(id: number): Reader {
-    return allReaders.find(reader => reader.readerID === id);
+  getReaderById(id: number): Observable<Reader> {
+    return this.http.get<Reader>(`/api/readers/${id}`, {
+      headers: new HttpHeaders({
+        'Accept': 'application/json'
+      })
+    });
+  }
+
+  addReader(newReader: Reader): Observable<Reader> {
+    return this.http.post<Reader>('/api/readers', newReader, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+  }
+
+  updateReader(updatedReader: Reader): Observable<void> {
+    return this.http.put<void>(`/api/readers/${updatedReader.readerID}`, updatedReader, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+  }
+
+  deleteReader(readerID: number): Observable<void> {
+    return this.http.delete<void>(`/api/readers/${readerID}`);
   }
 
   getAllBooks(): Observable<Book[]> {
@@ -42,19 +66,6 @@ export class DataService {
       })
     });
   }
-
-  // this block of code would transform data if needed.
-
-  // getOldBookById(id: number): Observable<OldBook> {
-  //   return this.http.get<Book>(`/api/books/${id}`)
-  //     .pipe(
-  //       map(b => <OldBook> {
-  //         bootTitle: b.title,
-  //         year: b.publicationYear
-  //       }),
-  //       tap(classicBook => console.log(classicBook))
-  //     );
-  // }
 
   addBook(newBook: Book): Observable<Book> {
     return this.http.post<Book>('/api/books', newBook, {
@@ -75,4 +86,19 @@ export class DataService {
   deleteBook(bookID: number): Observable<void> {
     return this.http.delete<void>(`/api/books/${bookID}`);
   }
+
+  // this block of code would transform data if needed.
+
+  // getOldBookById(id: number): Observable<OldBook> {
+  //   return this.http.get<Book>(`/api/books/${id}`)
+  //     .pipe(
+  //       map(b => <OldBook> {
+  //         bootTitle: b.title,
+  //         year: b.publicationYear
+  //       }),
+  //       tap(classicBook => console.log(classicBook))
+  //     );
+  // }
+
+
 }
