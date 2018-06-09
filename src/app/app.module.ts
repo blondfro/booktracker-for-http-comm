@@ -13,6 +13,13 @@ import { EditReaderComponent } from './edit-reader/edit-reader.component';
 import { CoreModule } from './core/core.module';
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    CoreModule,
+    HttpClientModule
+  ],
   declarations: [
     AppComponent,
     DashboardComponent,
@@ -20,13 +27,6 @@ import { CoreModule } from './core/core.module';
     EditReaderComponent,
     EditBookComponent,
     AddReaderComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    CoreModule,
-    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })
