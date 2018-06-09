@@ -28,8 +28,9 @@ export class DataService {
     return allReaders.find(reader => reader.readerID === id);
   }
 
-  getAllBooks(): Book[] {
-    return allBooks;
+  getAllBooks(): Observable<Book[]> {
+    console.log('Getting all books');
+    return this.http.get<Book[]>('/api/books');
   }
 
   getBookById(id: number): Book {
